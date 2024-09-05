@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form input {
+            margin: 10px;
+            margin-left: 20px;
+            padding: 8px;
+        }
+
+        table {
+            width: 60%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        a button {
+            padding: 5px 10px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Book Store</h1>
+    <form action="/insert" method="post">
+        <input type="text" placeholder="Book Title :" name="title">
+        <input type="text" placeholder="Book Author :" name="author">
+        <input type="number" placeholder="Published Year :" name="publishedYear">
+        <input type="number" placeholder="Book Pages :" name="pages">
+        <input type="number" placeholder="Book Price :" name="price">
+        <input type="number" placeholder="Published Copies :" name="publishedCopies">
+        <input type="submit" value="Submit">
+    </form>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Year</th>
+            <th>Pages</th>
+            <th>Price</th>
+            <th>Published Copies</th>
+            <th>Actions</th>
+        </tr>
+        <% data.map((e, i) => { %>
+            <tr>
+                <td><%= e.title %></td>
+                <td><%= e.author %></td>
+                <td><%= e.publishedYear %></td>
+                <td><%= e.pages %></td>
+                <td><%= e.price %></td>
+                <td><%= e.publishedCopies %></td>
+                <td>
+                    <a href="/deleteData?id=<%= e.id %>"><button>Delete</button></a>
+                    <a href="/editData?id=<%= e.id %>"><button>Edit</button></a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>
+
