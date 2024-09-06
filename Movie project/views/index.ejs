@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie app</title>
+    <style>
+     :root {
+    --primary-color: #315cb3;
+    --secondary-color: #1a1a1a;
+    --dark-color: #333;
+    --light-color: #f4f4f4;
+    --border-color: #ddd;
+    --hover-color: #1d72b8;
+    --focus-color: #004a99; /* New variable for focus styles */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--light-color);
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo img {
+    margin-left: 50px;
+    height: 60px;
+    width: auto;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.location {
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    color: var(--dark-color);
+    font-size: 16px;
+}
+
+.location .arrow-down {
+    border: solid var(--dark-color);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    margin-left: 5px;
+}
+
+.sign-in button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, outline 0.3s;
+}
+
+.sign-in button:hover,
+.sign-in button:focus {
+    background-color: var(--hover-color);
+    outline: 2px solid var(--focus-color);
+}
+
+.menu-icon {
+    display: none;
+}
+
+.sub-menu {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sub-menu a {
+    margin: 0 15px;
+    color: var(--dark-color);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.sub-menu a:hover,
+.sub-menu a:focus {
+    color: var(--primary-color);
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.movie-card {
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+.movie-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.poster {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.rating {
+    background-color: #222;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating .star {
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.rating-score {
+    font-size: 18px;
+}
+
+.title {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: var(--dark-color);
+}
+
+.genre {
+    color: #777;
+    font-size: 0.9em;
+    padding-bottom: 10px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.card-button {
+    width: 80px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, outline 0.3s;
+}
+
+.card-button:hover,
+.card-button:focus {
+    background-color: var(--hover-color);
+    outline: 2px solid var(--focus-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar input {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .sub-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .sub-menu a {
+        margin: 5px 0;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .movie-card {
+        width: 90%;
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="https://imgbb.com/"><img src="https://i.ibb.co/gtwvfsF/png-transparent-logo-bookmyshow-business-brand-india-business-text-people-logo-thumbnail-removebg-pr.png" alt="png-transparent-logo-bookmyshow-business-brand-india-business-text-people-logo-thumbnail-removebg-pr" border="0"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+            </div>
+            <div class="location">
+                <span>Rajkot</span> <hr><hr><hr> <i class="arrow-down" ></i>
+            </div>
+            <div class="sign-in">
+                <a href="/form"><button>Add data</button></a>
+            </div>
+            <div class="menu-icon">
+                <i class="hamburger"></i>
+            </div>
+        </div>
+        <nav class="sub-menu">
+            <a href="#">Movies</a>
+            <a href="#">Stream</a>
+            <a href="#">Events</a>
+            <a href="#">Plays</a>
+            <a href="#">Sports</a>
+            <a href="#">Activities</a>
+            <a href="#">ListYourShow</a>
+            <a href="#">Corporates</a>
+            <a href="#">Offers</a>
+            <a href="#">Gift Cards</a>
+        </nav>
+        <div class="card-container">
+            <% data.map((el, i) => { %>
+            <div class="movie-card">
+                <img src="<%= el.image %>" alt="<%= el.name %>" class="poster">
+                <div class="rating">
+                    <span class="star">&#9733;</span>
+                    <span class="rating-score"><%= el.rating %>/10</span>
+                </div>
+                <h3 class="title"><%= el.name %></h3>
+                <div class="genre"><%= el.movietype %></div>
+                <div class="card-actions">
+                    <a href="/deletemovie?id=<%= el.id %>"><button class="card-button">Delete</button></a>
+                    <a href="/editdmovie?id=<%= el.id %>"><button class="card-button">Edit</button></a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </header>
+</body>
+
+</html>
