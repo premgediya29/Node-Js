@@ -24,12 +24,18 @@
 }
 
 body {
+    /* background-color: #76c8da; */
     background-color: var(--light-color);
 }
 
 header {
-    background-color: white;
+    min-height: 100vh;
+    background-color: #76c8da;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+}
+::-webkit-scrollbar{
+    display: none;
 }
 
 .navbar {
@@ -100,8 +106,9 @@ header {
     display: flex;
     justify-content: center;
     padding: 10px 0;
-    background-color: #f9f9f9;
+   
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
 
 .sub-menu a {
@@ -251,11 +258,9 @@ header {
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/gtwvfsF/png-transparent-logo-bookmyshow-business-brand-india-business-text-people-logo-thumbnail-removebg-pr.png" alt="png-transparent-logo-bookmyshow-business-brand-india-business-text-people-logo-thumbnail-removebg-pr" border="0"></a>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+                <input type="text" placeholder="Search any Movies">
             </div>
-            <div class="location">
-                <span>Rajkot</span> <hr><hr><hr> <i class="arrow-down" ></i>
-            </div>
+           
             <div class="sign-in">
                 <a href="/form"><button>Add data</button></a>
             </div>

@@ -7,9 +7,8 @@ const app = express();
 
 const port = 7000;
 
-// Mongoose connection
 mongoose.connect("mongodb://localhost:27017/crudDB", {
-  // Removed deprecated options
+
 }).then(() => {
   console.log("Database connected");
 }).catch(err => console.log("Database connection error: ", err));
