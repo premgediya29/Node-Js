@@ -2,7 +2,9 @@ const express = require("express");
 const db=require("./config/Database");
 
 const cookieParser=require('cookie-parser');
-const port = 6578;
+const port = 8000;  // Change this to any available port
+
+
 // path //
 const path = require("path")
 // path //

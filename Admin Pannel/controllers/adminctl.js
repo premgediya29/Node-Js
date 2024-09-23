@@ -165,26 +165,28 @@ module.exports.insserdata=async(req,res)=>{
     }
 }
 
-module.exports.deletedata=async(req,res)=>{
+module.exports.deletedata = async (req, res) => {
+    try {
+        const singledata = await UserModel.findById(req.query.id);
 
+        // Ensure img field is defined and has a valid value
+        if (singledata && singledata.img) {
+            const imgpath = path.join(__dirname, '..', singledata.img);
 
-    try{
-        
-        const singledata=await UserModel.findById(req.query.id);
-       const imgpath=path.join(__dirname,'..',singledata.img)
+            if (fs.existsSync(imgpath) && fs.lstatSync(imgpath).isFile()) {
+                fs.unlinkSync(imgpath);  // Delete only if it's a file
+            } else {
+                console.log("Image path is not valid or file doesn't exist");
+            }
+        }
 
-        fs.unlinkSync(singledata.img)
-        
-       const deldata=await UserModel.findByIdAndDelete(req.query.id)
-       res.redirect("back")
-    }
-    catch(err){
-
-       console.log(err);
-   
+        await UserModel.findByIdAndDelete(req.query.id);
+        res.redirect("back");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while deleting the data.");
     }
 }
-
 module.exports.editdata=async(req,res)=>{
 
       try{
@@ -209,28 +211,34 @@ catch(err) {
 }
     
 }
-module.exports.updatedata=async(req,res)=>{
+module.exports.updatedata = async (req, res) => {
+    try {
+        let image = "";
+        const singledata = await UserModel.findById(req.query.id);
 
-  
-    try{
+        // Use the new image if provided, else keep the old image
+        req.file ? image = req.file.path : image = singledata.img;
 
-         let image="";
+        // Check if the current image path is a valid file
+        if (singledata.img) {
+            const imgpath = path.join(__dirname, '..', singledata.img);
 
-         const singledata=await UserModel.findById(req.query.id)
-         
-         req.file ? image = req.file.path : img = singledata.img 
+            // Log the image path for debugging
+            console.log('Image Path:', imgpath);
 
-         if(req.file){
-            fs.unlinkSync(singledata.img)
-         }
-         
-         req.body.img=image
+            if (fs.existsSync(imgpath) && fs.lstatSync(imgpath).isFile()) {
+                // Delete only if it's a file
+                fs.unlinkSync(imgpath);
+            } else {
+                console.log("Old image file does not exist or it's a directory.");
+            }
+        }
 
-        const updatedata=await UserModel.findByIdAndUpdate(req.query.id,req.body)
-        res.redirect("/ViewForm")
+        req.body.img = image;
+        await UserModel.findByIdAndUpdate(req.query.id, req.body);
+        res.redirect("/ViewForm");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while updating the data.");
     }
-    catch(err){
-       console.log(err);
-       
-    }
-}
+};
